@@ -2,3 +2,5 @@ Starting ChromeDriver 96.0.4664.45 (76e4c1bb2ab4671b8beba3444e61c0f17584b2fc-ref
 Only local connections are allowed.
 Please see https://chromedriver.chromium.org/security-considerations for suggestions on keeping ChromeDriver safe.
 ChromeDriver was started successfully.
+[1641557513.635][WARNING]: This version of ChromeDriver has not been tested with Chrome version 97.
+[1641557520.152][WARNING]: This version of ChromeDriver has not been tested with Chrome version 97.
