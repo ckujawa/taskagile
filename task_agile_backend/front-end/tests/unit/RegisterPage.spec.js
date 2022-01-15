@@ -1,6 +1,14 @@
-import Vue from 'vue'
-import {mount} from "@vue/test-utils";
+
+import {mount, createLocalVue} from "@vue/test-utils"
 import RegisterPage from '@/views/RegisterPage'
+import VueRouter from 'vue-router'
+import registrationService from '@/services/registration'
+
+const localVue = createLocalVue()
+localVue.use(VueRouter)
+const router = new VueRouter
+
+jest.mock('@/services/registration')
 
 describe('RegisterPage.vue', () =>{
   let wrapper
@@ -8,14 +16,29 @@ describe('RegisterPage.vue', () =>{
   let fieldEmailAddress
   let fieldPassword
   let buttonSubmit
+  let registerSpy
 
   beforeEach(() =>{
-    wrapper = mount(RegisterPage)
+    wrapper = mount(RegisterPage,{
+        localVue,
+        router
+      })
     fieldUsername = wrapper.find('#userName')
     fieldEmailAddress = wrapper.find('#emailAddress')
     fieldPassword = wrapper.find('#password')
     buttonSubmit = wrapper.find('form button[type="submit"]')
+    registerSpy = jest.spyOn(registrationService, 'register')
   })
+
+  afterEach(() => {
+    registerSpy.mockReset()
+    registerSpy.mockRestore()
+  })
+
+  afterAll(() =>{
+    jest.resetAllMocks()
+  })
+
   it('should render registration form', () =>{
     expect(wrapper.find('.logo').attributes().src)
       .toEqual('/static/images/logo.png')
@@ -56,4 +79,33 @@ describe('RegisterPage.vue', () =>{
     buttonSubmit.trigger('submit')
     expect(subSpy).toBeCalled()
   })
+
+  it('should register a new user', async () =>{
+    const spyOn = jest.spyOn(router, "push")
+    try {
+      await wrapper.setData({
+        form: {
+          username: 'sunny',
+          emailAddress: 'sunny@local',
+          password: 'superSecret'
+        }
+      })
+      wrapper.vm.submitForm()
+      await wrapper.vm.$nextTick(() => {
+        expect(spyOn).toHaveBeenCalledWith({name: 'LoginPage'})
+      })
+    } catch (e){
+      console.error("ouch!")
+    }
+  })
+
+/*  it('should fail it is not a new user', () => {
+    // In the mock, only sunny@local is new user
+    wrapper.vm.form.emailAddress = 'ted@local'
+    expect(wrapper.find('.failed').isVisible()).toBe(false)
+    wrapper.vm.submitForm()
+    wrapper.vm.$nextTick(null, () => {
+      expect(wrapper.find('.failed').isVisible()).toBe(true)
+    })
+  })*/
 })
