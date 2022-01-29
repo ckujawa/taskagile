@@ -4,6 +4,10 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+**/front-end/tests/e2e/reports
+**/front-end/chromedriver.log
+
+
 ### STS ###
 .apt_generated
 .classpath

@@ -99,13 +99,13 @@ describe('RegisterPage.vue', () =>{
     }
   })
 
-/*  it('should fail it is not a new user', () => {
+  it('should fail it is not a new user', () => {
     // In the mock, only sunny@local is new user
     wrapper.vm.form.emailAddress = 'ted@local'
     expect(wrapper.find('.failed').isVisible()).toBe(false)
     wrapper.vm.submitForm()
-    wrapper.vm.$nextTick(null, () => {
+    wrapper.vm.$nextTick(() => {
       expect(wrapper.find('.failed').isVisible()).toBe(true)
     })
-  })*/
+  })
 })

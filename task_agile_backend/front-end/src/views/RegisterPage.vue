@@ -8,21 +8,21 @@ import Vue from 'vue'
           <img class="logo" :src="`/static/images/logo.png`"/>
           <div class="tagline">Open source task management tool</div>
         </div>
-        <form @submit.prevent="submitForm">
+        <form class="border border-dark shadow shadow-lg p-4" @submit.prevent="submitForm">
           <div v-show="errorMessage" class="alert alert-danger failed">{{ errorMessage }}</div>
-          <div class="form-group">
+          <div class="form-group mt-2">
             <label for="userName">Username</label>
             <input type="text" class="form-control" id="userName" v-model="form.username"/>
           </div>
-          <div class="form-group">
+          <div class="form-group mt-2">
             <label for="emailAddress">Email Address</label>
             <input type="email" class="form-control" id="emailAddress" v-model="form.emailAddress"/>
           </div>
-          <div class="form-group">
+          <div class="form-group mt-2">
             <label for="password">Password</label>
             <input type="password" class="form-control" id="password" v-model="form.password"/>
           </div>
-          <button class="btn btn-primary btn-block" type="submit">Create Account</button>
+          <button class="btn btn-primary btn-block w-100 mt-3" type="submit">Create Account</button>
         </form>
       </div>
     </div>
