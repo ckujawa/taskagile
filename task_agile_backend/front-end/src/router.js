@@ -6,18 +6,23 @@ import RegisterPage from "./views/RegisterPage"
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/login',
-      name: 'LoginPage',
-      component: LoginPage
+      path: "/login",
+      name: "LoginPage",
+      component: LoginPage,
     },
     {
-      path: '/register',
-      name: 'RegisterPage',
-      component: RegisterPage
-    }
-  ]
-})
+      path: "/register",
+      name: "RegisterPage",
+      component: RegisterPage,
+    },
+    {
+      path: "/",
+      name: "RegisterPage",
+      component: RegisterPage,
+    },
+  ],
+});
